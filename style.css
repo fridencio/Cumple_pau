@@ -143,36 +143,111 @@ body::before {
 }
 
 /* =========================
-   CARDS GUSTOS
+  CALENDARIO DE POEMAS
    ========================= */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
 
-.card {
-  background: rgba(255,255,255,0.8);
-  border-radius: 18px;
-  padding: 1.4rem;
+.calendario {
   text-align: center;
-  font-size: 0.95rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card strong {
+.calendario .descripcion {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.calendario-poemas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Cada día */
+.dia.poema {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 211, 213, 0.6)
+  );
+  border-radius: 20px;
+  padding: 1.8rem 1.2rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.45s ease;
+  box-shadow: 0 8px 22px rgba(84, 8, 99, 0.18);
+  border: 1px solid rgba(146, 72, 122, 0.35);
+}
+
+/* Hover solo si está activo */
+.dia.poema.activo:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(84, 8, 99, 0.25);
+}
+
+/* Fecha */
+.dia .fecha {
   display: block;
-  margin: 0.6rem 0;
-  color: var(--color-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  color: #540863;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+/* Contenido del poema */
+.dia .contenido {
+  display: none;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #3a2a3a;
 }
+
+/* Día desbloqueado */
+.dia.activo {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 211, 213, 0.85),
+    rgba(228, 155, 166, 0.85)
+  );
+}
+
+/* Mostrar poema cuando esté abierto */
+.dia.abierto .contenido {
+  display: block;
+  animation: fadePoema 0.5s ease;
+}
+
+/* Días bloqueados */
+.dia.bloqueado {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.dia.bloqueado::after {
+  content: "🔒";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 1.1rem;
+}
+
+/* Animación poema */
+@keyframes fadePoema {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* =========================
-   CUALIDADES
+  CUALIDADES
    ========================= */
 .text-block {
   background: rgba(255,255,255,0.75);
