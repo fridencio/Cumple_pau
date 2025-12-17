@@ -325,6 +325,72 @@ body::before {
 }
 
 /* =========================
+   SORPRESA – CORAZÓN
+   ========================= */
+
+.sorpresa-contenido {
+  margin-top: 2rem;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+/* Contenedor corazón */
+.corazon {
+  position: relative;
+  width: 220px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 10px;
+  transform: rotate(-45deg);
+}
+
+/* Cada pieza */
+.pieza {
+  width: 60px;
+  height: 60px;
+  /*background: linear-gradient(135deg, #E49BA6, #FFD3D5);*/
+  background-image: url(img/1.1.jpeg);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(84, 8, 99, 0.25);
+  opacity: 0;
+  transform: scale(0.6);
+  animation: aparecer 0.6s ease forwards;
+}
+
+/* Animación escalonada */
+.pieza:nth-child(1) { animation-delay: 0.1s; }
+.pieza:nth-child(2) { animation-delay: 0.2s; }
+.pieza:nth-child(3) { animation-delay: 0.3s; }
+.pieza:nth-child(4) { animation-delay: 0.4s; }
+.pieza:nth-child(5) { animation-delay: 0.5s; }
+.pieza:nth-child(6) { animation-delay: 0.6s; }
+.pieza:nth-child(7) { animation-delay: 0.7s; }
+.pieza:nth-child(8) { animation-delay: 0.8s; }
+.pieza:nth-child(9) { animation-delay: 0.9s; }
+
+/* Frase */
+.frase {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #540863;
+  max-width: 320px;
+}
+
+/* Animación */
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================
    MUSICA
    ========================= */
 .musica {
