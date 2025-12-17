@@ -52,6 +52,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const hoy = new Date();
 const diaActual = hoy.getDate();
 const mesActual = hoy.getMonth(); // Diciembre = 11
+//const diaActual = 31;
 
 const diasPoemas = document.querySelectorAll(".dia.poema");
 
@@ -59,7 +60,7 @@ diasPoemas.forEach(dia => {
   const diaNumero = parseInt(dia.dataset.dia);
 
   // Solo funciona en diciembre
-  if (mesActual === 16 && diaNumero <= diaActual) {
+  if (mesActual === 11 && diaNumero <= diaActual) {
     dia.classList.add("activo");
   } else {
     dia.classList.add("bloqueado");

@@ -219,6 +219,7 @@ body::before {
   width: 88%;
   max-height: 170px;
   background: #f8f3e8;
+  /*background-image: url(img/hoja.png);*/
   border-radius: 6px;
   padding: 1rem;
   font-size: 0.9rem;
