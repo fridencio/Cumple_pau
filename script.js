@@ -46,8 +46,46 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================
-     EFECTO CLICK SUAVE (GLOBAL)
-     ========================= */
+  LÓGICA CALENDARIO POEMAS
+   ========================= */
+
+const hoy = new Date();
+const diaActual = hoy.getDate();
+const mesActual = hoy.getMonth(); // Diciembre = 11
+
+const diasPoemas = document.querySelectorAll(".dia.poema");
+
+diasPoemas.forEach(dia => {
+  const diaNumero = parseInt(dia.dataset.dia);
+
+  // Solo funciona en diciembre
+  if (mesActual === 16 && diaNumero <= diaActual) {
+    dia.classList.add("activo");
+  } else {
+    dia.classList.add("bloqueado");
+  }
+
+  // Click para abrir / cerrar
+  dia.addEventListener("click", () => {
+    // Si está bloqueado, no hace nada
+    if (dia.classList.contains("bloqueado")) return;
+
+    // Cerrar otras cartas abiertas
+    diasPoemas.forEach(d => {
+      if (d !== dia) {
+        d.classList.remove("abierto");
+      }
+    });
+
+    // Abrir / cerrar la actual
+    dia.classList.toggle("abierto");
+  });
+});
+
+
+  /* =========================
+EFECTO CLICK SUAVE (GLOBAL)
+========================= */
   document.addEventListener('click', (e) => {
   const cantidad = 8; // número de margaritas por click
 

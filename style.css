@@ -143,7 +143,7 @@ body::before {
 }
 
 /* =========================
-  CALENDARIO DE POEMAS
+   CALENDARIO DE POEMAS
    ========================= */
 
 .calendario {
@@ -157,69 +157,101 @@ body::before {
   opacity: 0.85;
 }
 
+/* Grid del calendario */
 .calendario-poemas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+  gap: 1.8rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Cada día */
+/* =========================
+   CONTENEDOR DE CADA DÍA
+   ========================= */
+
 .dia.poema {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.85),
-    rgba(255, 211, 213, 0.6)
-  );
-  border-radius: 20px;
-  padding: 1.8rem 1.2rem;
-  cursor: pointer;
   position: relative;
-  transition: all 0.45s ease;
-  box-shadow: 0 8px 22px rgba(84, 8, 99, 0.18);
-  border: 1px solid rgba(146, 72, 122, 0.35);
+  height: 240px;
+  cursor: pointer;
+  perspective: 1000px;
 }
 
-/* Hover solo si está activo */
-.dia.poema.activo:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 30px rgba(84, 8, 99, 0.25);
+/* =========================
+   SOBRE (CARTA CERRADA)
+   ========================= */
+
+.sobre {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(145deg, #ffd3d5, #e49ba6);
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(84, 8, 99, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease;
 }
 
-/* Fecha */
-.dia .fecha {
-  display: block;
+/* Solapa del sobre */
+.solapa {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #e49ba6, #92487a);
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 3;
+}
+
+/* =========================
+   PAPEL DEL POEMA
+   ========================= */
+
+.papel {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  width: 88%;
+  max-height: 170px;
+  background: #f8f3e8;
+  border-radius: 6px;
+  padding: 1rem;
   font-size: 0.9rem;
-  margin-bottom: 0.8rem;
-  font-weight: 500;
-  color: #540863;
-}
-
-/* Contenido del poema */
-.dia .contenido {
-  display: none;
-  font-size: 0.95rem;
   line-height: 1.6;
   color: #3a2a3a;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transition: all 0.6s ease;
+  z-index: 1;
+  overflow-y: auto;
 }
 
-/* Día desbloqueado */
-.dia.activo {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 211, 213, 0.85),
-    rgba(228, 155, 166, 0.85)
-  );
+/* =========================
+   ESTADO ABIERTO
+   ========================= */
+
+.dia.abierto .solapa {
+  transform: rotateX(160deg);
 }
 
-/* Mostrar poema cuando esté abierto */
-.dia.abierto .contenido {
-  display: block;
-  animation: fadePoema 0.5s ease;
+.dia.abierto .papel {
+  transform: translateX(-50%) translateY(-45px);
+  opacity: 1;
 }
 
-/* Días bloqueados */
+.dia.abierto .sobre {
+  transform: translateY(10px);
+}
+
+/* =========================
+   DÍAS BLOQUEADOS
+   ========================= */
+
 .dia.bloqueado {
   opacity: 0.45;
   cursor: not-allowed;
@@ -228,22 +260,25 @@ body::before {
 .dia.bloqueado::after {
   content: "🔒";
   position: absolute;
-  top: 12px;
-  right: 14px;
+  top: 8px;
+  right: 10px;
   font-size: 1.1rem;
 }
 
-/* Animación poema */
-@keyframes fadePoema {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 480px) {
+  .dia.poema {
+    height: 260px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .papel {
+    font-size: 0.85rem;
   }
 }
+
 
 
 /* =========================
