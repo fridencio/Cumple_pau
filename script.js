@@ -199,47 +199,66 @@ function inicializarSorpresaCorazon() {
   }
   
   function inicializarVideo() {
-    const btnVerVideo = document.getElementById('ver-video');
-    const carruselVideo = document.getElementById('carrusel-video');
-    const btnCerrarVideo = document.getElementById('cerrar-video');
+  const btnVerVideo = document.getElementById('ver-video');
+  const corazonVideo = document.getElementById('corazon-video');
+  const btnCerrarVideo = document.getElementById('cerrar-video');
+  
+  if (btnVerVideo && corazonVideo) {
+    const videoElement = corazonVideo.querySelector('video');
     
-    if (btnVerVideo && carruselVideo) {
-      const videoElement = carruselVideo.querySelector('video');
+    btnVerVideo.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Mostrando video en forma de corazón');
       
-      btnVerVideo.addEventListener('click', function(e) {
+      // Ocultar el carrusel
+      document.querySelector('.carrusel').style.opacity = '0.3';
+      document.querySelector('.carrusel-indicadores').style.opacity = '0.3';
+      
+      // Mostrar el corazón con video
+      corazonVideo.style.display = 'flex';
+      
+      // Reproducir video
+      if (videoElement) {
+        videoElement.play().catch(e => console.error('Error al reproducir video:', e));
+      }
+      
+      // Detener auto-avance
+      detenerAutoAvance();
+    });
+    
+    if (btnCerrarVideo) {
+      btnCerrarVideo.addEventListener('click', function(e) {
         e.preventDefault();
-        console.log('Mostrando video');
-        carruselVideo.style.display = 'block';
-        if (videoElement) {
-          videoElement.play().catch(e => console.error('Error al reproducir video:', e));
-        }
-        detenerAutoAvance();
+        cerrarVideo();
       });
+    }
+    
+    // Cerrar video con tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && corazonVideo.style.display === 'flex') {
+        cerrarVideo();
+      }
+    });
+    
+    function cerrarVideo() {
+      // Restaurar el carrusel
+      document.querySelector('.carrusel').style.opacity = '1';
+      document.querySelector('.carrusel-indicadores').style.opacity = '1';
       
-      if (btnCerrarVideo) {
-        btnCerrarVideo.addEventListener('click', function(e) {
-          e.preventDefault();
-          cerrarVideo();
-        });
+      // Ocultar el corazón con video
+      corazonVideo.style.display = 'none';
+      
+      // Pausar y resetear video
+      if (videoElement) {
+        videoElement.pause();
+        videoElement.currentTime = 0;
       }
       
-      // Cerrar video con tecla ESC
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && carruselVideo.style.display === 'block') {
-          cerrarVideo();
-        }
-      });
-      
-      function cerrarVideo() {
-        carruselVideo.style.display = 'none';
-        if (videoElement) {
-          videoElement.pause();
-          videoElement.currentTime = 0;
-        }
-        iniciarAutoAvance();
-      }
+      // Reanudar auto-avance
+      iniciarAutoAvance();
     }
   }
+}
   
   // ===============================
   // FUNCIONES AUTO-AVANCE
