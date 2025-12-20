@@ -65,7 +65,7 @@
   </div>
 
   <div class="papel">
-    <p>Éramos dos silencios que se entendían.</p>
+    <p>No te hace falta que nadie te guíe, tú misma eres el mapa y el destino. Tienes esa fuerza que no hace ruido, pero que abre cualquier camino.</p>
   </div>
 </div>
 
@@ -89,7 +89,9 @@
   </div>
 
   <div class="papel">
-    <p>Si hago cosas por ti, no es para que me quieras, es porque quiero que sepas que te quiero.</p>
+    <p>A veces se nos olvida lo mucho que valemos, pero hay una luz en ti que es muy clara. 
+      Nunca dejes de creer en lo que eres capaz de hacer, 
+      solo porque el resto del mundo no se atreve a intentarlo.</p>
   </div>
 </div>
 
@@ -101,7 +103,8 @@
   </div>
 
   <div class="papel">
-    <p>La persona indicada no llega preparada, viene dispuesta.</p>
+    <p>Hay una calma muy propia en ti, de esa que solo tienen las personas que saben quiénes son. 
+      Tienes el talento de hacer que lo difícil parezca sencillo y lo ordinario, algo especial.</p>
   </div>
 </div>
 
@@ -113,7 +116,8 @@
   </div>
 
   <div class="papel">
-    <p>No hay un solo día en que te mire y no sienta el inmenso privilegio que yo he tenido en esta vida de que tu vida se cruzara con la mía.</p>
+    <p>No hay un solo día en que te mire y no sienta el inmenso 
+      privilegio que yo he tenido en esta vida de que tu vida se cruzara con la mía.</p>
   </div>
 </div>
 
@@ -138,10 +142,7 @@
 
   <div class="papel">
     <p>
-      Este no es un poema... sinceramente, aún no sé mucho sobre ti,
-      pero siempre me encantará la idea de conocerte más… mientras tú
-      me quieras en tu vida, yo siempre seré esa persona que se preocupe
-      por ti, que te apoyará en todo y nunca dejarte.
+      Que nunca se te olvide lo valioso que es tu tiempo, lo importante que es tu voz y lo increíble que es todo lo que puedes lograr.
     </p>
   </div>
 </div>
@@ -231,14 +232,14 @@
   <div class="sorpresa-contenido" id="sorpresa">
     
     <div class="corazon-container">
-      <div class="corazon">
-        <!-- Carrusel de imágenes dentro del corazón -->
-        <div class="corazon-carrusel">
+      <div class="carrusel-contenedor">
+        <!-- Carrusel de imágenes -->
+        <div class="carrusel">
           <!-- Las 8 imágenes se cargarán aquí con JavaScript -->
         </div>
         
         <!-- Video oculto inicialmente -->
-        <div class="corazon-video" id="corazon-video">
+        <div class="carrusel-video" id="carrusel-video">
           <video controls autoplay muted>
             <source src="img/1.9.mp4" type="video/mp4">
             Tu navegador no soporta videos HTML5.
@@ -246,20 +247,15 @@
           <button class="btn-cerrar-video" id="cerrar-video">×</button>
         </div>
         
-        <!-- Indicadores del carrusel -->
-        <div class="carrusel-indicadores">
-          <!-- Se generarán con JavaScript -->
-        </div>
-        
         <!-- Controles del carrusel -->
         <button class="carrusel-btn carrusel-prev">‹</button>
         <button class="carrusel-btn carrusel-next">›</button>
-      </div>
+      </div> <!-- ¡ESTE CIERRE FALTABA! -->
       
-      <div class="corazon-info">
+      <div class="carrusel-info">
         <p class="imagen-contador">Imagen <span id="imagen-actual">1</span> de 8</p>
         <button class="btn-ver-video" id="ver-video">
-          <span>🎬</span> Ver video especial
+          Ver video especial
         </button>
       </div>
     </div>
@@ -268,8 +264,8 @@
       Algunos recuerdos no se guardan en fotos,<br>
       se guardan en el corazón.
     </p>
-
-  </div>
+    
+  </div> <!-- cierra sorpresa-contenido -->
 </section>
 
   <!-- 🌙 FOOTER -->

@@ -310,112 +310,167 @@ body::before {
 }
 
 /* =========================
-   SORPRESA – CORAZÓN
+   SORPRESA – CONTENEDOR
    ========================= */
 
 .sorpresa {
   text-align: center;
 }
 
+/* El contenido de la sorpresa debe estar OCULTO inicialmente */
 .sorpresa-contenido {
   margin-top: 2rem;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px;
-  display: none;
+  display: none; /* ← ESTO ES IMPORTANTE: oculto inicialmente */
   flex-direction: column;
   align-items: center;
   gap: 1.8rem;
+  max-width: 550px; /* ← Añadir un ancho máximo */
+  margin-left: auto;
+  margin-right: auto; /* ← Centra horizontalmente */
 }
 
-/* Contenedor principal del corazón */
-.corazon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
+/* =========================
+   CARRUSEL – CONTENEDOR
+   ========================= */
 
-/* Corazón principal */
-.corazon {
-  width: 350px;
-  height: 320px;
+.carrusel-contenedor {
+  width: 100%;
+  max-width: 500px;
+  height: 350px;
   position: relative;
-  margin: 0 auto;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
+  margin: 0 auto; /* ← Centra el carrusel */
   border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(84, 8, 99, 0.2);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(84, 8, 99, 0.25);
 }
 
-/* Clip-path para la forma de corazón */
-.corazon,
-.corazon-carrusel,
-.corazon-video {
-  clip-path: polygon(
-    50% 15%,
-    61% 6%,
-    70% 4%,
-    80% 8%,
-    88% 18%,
-    90% 28%,
-    88% 38%,
-    82% 48%,
-    75% 58%,
-    65% 70%,
-    55% 82%,
-    50% 90%,
-    45% 82%,
-    35% 70%,
-    25% 58%,
-    18% 48%,
-    12% 38%,
-    10% 28%,
-    12% 18%,
-    20% 8%,
-    30% 4%,
-    39% 6%);
-}
-
-/* Carrusel dentro del corazón */
-.corazon-carrusel {
+/* El carrusel en sí */
+.carrusel {
   width: 100%;
   height: 100%;
   position: relative;
   display: flex;
+  overflow: visible;
   opacity: 0;
-  transform: scale(0.8);
-  animation: latido 1.2s ease forwards;
-}
-
-/* Cada imagen del carrusel */
-.imagen-corazon {
-  width: 100%;
-  height: 100%;
-  flex: 0 0 100%;
-  background-size: cover;
-  background-position: center;
+  transform: scale(0.9);
+  animation: aparecer 0.8s ease forwards;
   transition: transform 0.5s ease;
 }
 
-/* Animación de latido */
-@keyframes latido {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  100% {
+@keyframes aparecer {
+  to {
     opacity: 1;
     transform: scale(1);
   }
 }
 
-/* Video dentro del corazón */
-.corazon-video {
+/* Cada imagen del carrusel */
+.carrusel-imagen {
+  min-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease;
+}
+
+/* =========================
+   CONTROLES DEL CARRUSEL
+   ========================= */
+
+.carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #540863;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carrusel-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carrusel-prev {
+  left: 15px;
+}
+
+.carrusel-next {
+  right: 15px;
+}
+
+/* =========================
+   INDICADORES
+   ========================= */
+
+.carrusel-indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.indicador {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(84, 8, 99, 0.3);
+  border: 2px solid rgba(84, 8, 99, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicador.activo {
+  background: #FF6B8B;
+  transform: scale(1.2);
+  border-color: #FF6B8B;
+}
+
+/* =========================
+   INFORMACIÓN DEL CARRUSEL
+   ========================= */
+
+.carrusel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.imagen-contador {
+  font-size: 1.1rem;
+  color: #540863;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.6rem 1.8rem;
+  border-radius: 25px;
+  box-shadow: 0 5px 15px rgba(84, 8, 99, 0.1);
+  border: 2px solid rgba(255, 107, 139, 0.3);
+}
+
+/* =========================
+   VIDEO
+   ========================= */
+
+.carrusel-video {
   position: absolute;
   top: 0;
   left: 0;
@@ -426,148 +481,91 @@ body::before {
   z-index: 10;
 }
 
-.corazon-video video {
+.carrusel-video video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background: #000;
 }
 
-/* Botón para cerrar video */
 .btn-cerrar-video {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.9);
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
   line-height: 1;
   cursor: pointer;
   z-index: 11;
   transition: all 0.3s ease;
-}
-
-.btn-cerrar-video:hover {
-  background: white;
-  transform: scale(1.1);
-}
-
-/* Indicadores del carrusel */
-.carrusel-indicadores {
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  z-index: 5;
-}
-
-.indicador {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.indicador.activo {
-  background: #FF6B8B;
-  transform: scale(1.2);
-}
-
-/* Controles del carrusel */
-.carrusel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  border-radius: 50%;
-  font-size: 24px;
   color: #540863;
-  cursor: pointer;
-  z-index: 5;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.carrusel-btn:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-}
+/* =========================
+   BOTÓN VER VIDEO
+   ========================= */
 
-.carrusel-prev {
-  left: 10px;
-}
-
-.carrusel-next {
-  right: 10px;
-}
-
-/* Información debajo del corazón */
-.corazon-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.imagen-contador {
-  font-size: 0.9rem;
-  color: #540863;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-}
-
-/* Botón para ver video */
 .btn-ver-video {
   background: linear-gradient(135deg, #FF6B8B, #FF8E53);
   color: white;
   border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
-}
-
-.btn-ver-video:hover {
-  transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 107, 139, 0.4);
 }
 
-.btn-ver-video span {
-  font-size: 1.2rem;
+.btn-ver-video:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255, 107, 139, 0.5);
 }
 
-/* Frase */
+/* =========================
+   FRASE
+   ========================= */
+
 .frase {
   text-align: center;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.7;
   color: #540863;
-  max-width: 320px;
+  max-width: 400px;
   margin-top: 1rem;
   font-style: italic;
 }
 
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 600px) {
+  .sorpresa-contenido {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .carrusel-contenedor {
+    height: 300px;
+  }
+  
+  .carrusel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+}
 /* =========================
   EFECTO CLICK - MARGARITAS
    ========================= */
@@ -615,7 +613,7 @@ body::before {
   background-image: url('img/Margarita.png');
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.12; /* muy sutil */
+  opacity: 0.18; /* muy sutil */
   animation: floatFlower linear infinite;
 }
 

@@ -43,7 +43,7 @@ function inicializarBotonDescubrir() {
 }
 
 // ===============================
-// 2. SORPRESA CORAZÓN CON CARRUSEL
+// 2.CARRUSEL
 // ===============================
 function inicializarSorpresaCorazon() {
   const btnSorpresa = document.getElementById('btn-sorpresa');
@@ -55,6 +55,7 @@ function inicializarSorpresaCorazon() {
   let imagenIndex = 0;
   const totalImagenes = 8;
   let intervaloAutoAvance;
+  let carruselElement; // Variable global para el carrusel
   
   btnSorpresa.addEventListener('click', () => {
     const isVisible = sorpresaContenido.style.display === 'flex';
@@ -79,10 +80,10 @@ function inicializarSorpresaCorazon() {
         btnSorpresa.style.display = 'none';
       }, 2000);
       
-      // Inicializar el carrusel del corazón
+      // Inicializar el carrusel
       setTimeout(() => {
         inicializarCarrusel();
-      }, 600);
+      }, 100);
     }
   });
   
@@ -91,23 +92,31 @@ function inicializarSorpresaCorazon() {
   // ===============================
   
   function inicializarCarrusel() {
-    const corazonCarrusel = document.querySelector('.corazon-carrusel');
+    carruselElement = document.querySelector('.carrusel');
     const indicadoresContainer = document.querySelector('.carrusel-indicadores');
     const imagenActual = document.getElementById('imagen-actual');
     
-    if (!corazonCarrusel) return;
+    console.log('Carrusel encontrado:', carruselElement);
+    console.log('Indicadores encontrados:', indicadoresContainer);
+    
+    if (!carruselElement) {
+      console.error('ERROR: No se encontró .carrusel');
+      return;
+    }
     
     // Limpiar contenido previo
-    corazonCarrusel.innerHTML = '';
+    carruselElement.innerHTML = '';
     if (indicadoresContainer) indicadoresContainer.innerHTML = '';
     
     // Crear imágenes del carrusel
     for (let i = 1; i <= totalImagenes; i++) {
       const imgDiv = document.createElement('div');
-      imgDiv.className = 'imagen-corazon';
+      imgDiv.className = 'carrusel-imagen';
       imgDiv.style.backgroundImage = `url('img/1.${i}.jpeg')`;
       imgDiv.dataset.index = i - 1;
-      corazonCarrusel.appendChild(imgDiv);
+      carruselElement.appendChild(imgDiv);
+      
+      console.log(`Imagen ${i} creada: img/1.${i}.jpeg`);
       
       // Crear indicadores
       if (indicadoresContainer) {
@@ -132,22 +141,26 @@ function inicializarSorpresaCorazon() {
     // Inicializar video
     inicializarVideo();
     
-    // Iniciar auto-avance después de 3 segundos
-    setTimeout(iniciarAutoAvance, 3000);
+    // Iniciar auto-avance después de 1 segundo
+    setTimeout(iniciarAutoAvance, 1000);
   }
   
   function cambiarImagen(nuevoIndex) {
+    console.log(`Cambiando imagen: ${imagenIndex} -> ${nuevoIndex}`);
+    
     imagenIndex = nuevoIndex;
-    const corazonCarrusel = document.querySelector('.corazon-carrusel');
     const imagenActual = document.getElementById('imagen-actual');
     
-    if (corazonCarrusel) {
-      corazonCarrusel.style.transform = `translateX(-${imagenIndex * 100}%)`;
+    if (carruselElement) {
+      const translateX = -(imagenIndex * 100);
+      carruselElement.style.transform = `translateX(${translateX}%)`;
+      console.log(`Transform aplicada: translateX(${translateX}%)`);
     }
     
     // Actualizar indicadores
     document.querySelectorAll('.indicador').forEach((ind, index) => {
-      ind.classList.toggle('activo', index === imagenIndex);
+      const isActive = index === imagenIndex;
+      ind.classList.toggle('activo', isActive);
     });
     
     // Actualizar contador
@@ -157,61 +170,72 @@ function inicializarSorpresaCorazon() {
   }
   
   function inicializarControlesCarrusel() {
-    const btnPrev = document.querySelector('.carrusel-prev');
-    const btnNext = document.querySelector('.carrusel-next');
-    const corazonCarrusel = document.querySelector('.corazon-carrusel');
-    
-    if (btnPrev) {
-      btnPrev.addEventListener('click', () => {
+    // Usar event delegation para los botones ya que podrían no estar disponibles inmediatamente
+    document.addEventListener('click', (e) => {
+      // Botón anterior
+      if (e.target.classList.contains('carrusel-prev') || 
+          e.target.closest('.carrusel-prev')) {
+        e.preventDefault();
         const nuevoIndex = (imagenIndex - 1 + totalImagenes) % totalImagenes;
         cambiarImagen(nuevoIndex);
         reiniciarAutoAvance();
-      });
-    }
-    
-    if (btnNext) {
-      btnNext.addEventListener('click', () => {
+      }
+      
+      // Botón siguiente
+      if (e.target.classList.contains('carrusel-next') || 
+          e.target.closest('.carrusel-next')) {
+        e.preventDefault();
         const nuevoIndex = (imagenIndex + 1) % totalImagenes;
         cambiarImagen(nuevoIndex);
         reiniciarAutoAvance();
-      });
-    }
+      }
+    });
     
     // Pausar auto-avance al interactuar con el carrusel
-    if (corazonCarrusel) {
-      corazonCarrusel.addEventListener('mouseenter', detenerAutoAvance);
-      corazonCarrusel.addEventListener('mouseleave', iniciarAutoAvance);
+    if (carruselElement) {
+      carruselElement.addEventListener('mouseenter', detenerAutoAvance);
+      carruselElement.addEventListener('mouseleave', iniciarAutoAvance);
     }
   }
   
   function inicializarVideo() {
     const btnVerVideo = document.getElementById('ver-video');
-    const corazonVideo = document.getElementById('corazon-video');
+    const carruselVideo = document.getElementById('carrusel-video');
     const btnCerrarVideo = document.getElementById('cerrar-video');
-    const videoElement = corazonVideo ? corazonVideo.querySelector('video') : null;
     
-    if (btnVerVideo && corazonVideo && videoElement) {
-      btnVerVideo.addEventListener('click', function() {
-        corazonVideo.style.display = 'block';
-        videoElement.play();
+    if (btnVerVideo && carruselVideo) {
+      const videoElement = carruselVideo.querySelector('video');
+      
+      btnVerVideo.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log('Mostrando video');
+        carruselVideo.style.display = 'block';
+        if (videoElement) {
+          videoElement.play().catch(e => console.error('Error al reproducir video:', e));
+        }
         detenerAutoAvance();
       });
       
-      btnCerrarVideo.addEventListener('click', function() {
-        cerrarVideo();
-      });
+      if (btnCerrarVideo) {
+        btnCerrarVideo.addEventListener('click', function(e) {
+          e.preventDefault();
+          cerrarVideo();
+        });
+      }
       
       // Cerrar video con tecla ESC
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && corazonVideo.style.display === 'block') {
+        if (e.key === 'Escape' && carruselVideo.style.display === 'block') {
           cerrarVideo();
         }
       });
       
       function cerrarVideo() {
-        corazonVideo.style.display = 'none';
-        videoElement.pause();
-        videoElement.currentTime = 0;
+        carruselVideo.style.display = 'none';
+        if (videoElement) {
+          videoElement.pause();
+          videoElement.currentTime = 0;
+        }
         iniciarAutoAvance();
       }
     }
@@ -223,19 +247,24 @@ function inicializarSorpresaCorazon() {
   
   function iniciarAutoAvance() {
     detenerAutoAvance();
+    console.log('Iniciando auto-avance');
     intervaloAutoAvance = setInterval(() => {
       const nuevoIndex = (imagenIndex + 1) % totalImagenes;
+      console.log('Auto-avance a imagen:', nuevoIndex);
       cambiarImagen(nuevoIndex);
-    }, 5000);
+    }, 3000); // Cambié a 3 segundos para probar más rápido
   }
   
   function detenerAutoAvance() {
+    console.log('Deteniendo auto-avance');
     if (intervaloAutoAvance) {
       clearInterval(intervaloAutoAvance);
+      intervaloAutoAvance = null;
     }
   }
   
   function reiniciarAutoAvance() {
+    console.log('Reiniciando auto-avance');
     detenerAutoAvance();
     iniciarAutoAvance();
   }
@@ -250,7 +279,7 @@ function inicializarCalendarioPoemas() {
   const mesActual = hoy.getMonth(); // Diciembre = 11
   
   // Para pruebas: descomenta la siguiente línea
-  const diaActual = 31;
+  const diaActual = 22;
   
   const diasPoemas = document.querySelectorAll(".dia.poema");
   
