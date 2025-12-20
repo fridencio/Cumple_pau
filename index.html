@@ -224,23 +224,44 @@
   </section>
 
   <!-- 🎁 SORPRESA -->
-  <section class="section sorpresa">
+ <section class="section sorpresa">
   <h2>Un pequeño detalle</h2>
   <button class="btn-secondary" id="btn-sorpresa">Ábreme</button>
 
   <div class="sorpresa-contenido" id="sorpresa">
     
-    <div class="corazon">
-      <!-- Placeholders (luego serán imágenes) -->
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
-      <div class="pieza"></div>
+    <div class="corazon-container">
+      <div class="corazon">
+        <!-- Carrusel de imágenes dentro del corazón -->
+        <div class="corazon-carrusel">
+          <!-- Las 8 imágenes se cargarán aquí con JavaScript -->
+        </div>
+        
+        <!-- Video oculto inicialmente -->
+        <div class="corazon-video" id="corazon-video">
+          <video controls autoplay muted>
+            <source src="img/1.9.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+          </video>
+          <button class="btn-cerrar-video" id="cerrar-video">×</button>
+        </div>
+        
+        <!-- Indicadores del carrusel -->
+        <div class="carrusel-indicadores">
+          <!-- Se generarán con JavaScript -->
+        </div>
+        
+        <!-- Controles del carrusel -->
+        <button class="carrusel-btn carrusel-prev">‹</button>
+        <button class="carrusel-btn carrusel-next">›</button>
+      </div>
+      
+      <div class="corazon-info">
+        <p class="imagen-contador">Imagen <span id="imagen-actual">1</span> de 8</p>
+        <button class="btn-ver-video" id="ver-video">
+          <span>🎬</span> Ver video especial
+        </button>
+      </div>
     </div>
 
     <p class="frase">
@@ -250,15 +271,6 @@
 
   </div>
 </section>
-
-
-  <!-- 🎶 MÚSICA -->
-  <section class="section musica">
-    <h2>Música</h2>
-    <p>Lofi suave para acompañar este momento</p>
-    <!-- Aquí luego se agregará el audio -->
-    <button class="btn-music">Reproducir / Pausar</button>
-  </section>
 
   <!-- 🌙 FOOTER -->
   <footer class="footer">
