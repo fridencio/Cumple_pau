@@ -27,24 +27,25 @@
 }
 
 body {
-  font-family: 'MiTipografia', sans-serif;
-  font-size: 16px;                 
-  background: linear-gradient(180deg, var(--color-soft), var(--color-white));
-  color: #3a2a3a;                 
-  line-height: 1.75;               
-  overflow-x: hidden;
+    font-family: 'MiTipografia', sans-serif;
+    font-size: 16px;                 
+    background: linear-gradient(180deg, var(--color-soft), var(--color-white));
+    color: var(--color-text);                 
+    line-height: 1.75;               
+    overflow-x: hidden;
 }
 
 /* =========================
-    FONDO (placeholder partículas)
+    FONDO
    ========================= */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background-image: radial-gradient(circle at 20% 30%, rgba(228,155,166,0.15) 0%, transparent 40%),
-                    radial-gradient(circle at 80% 60%, rgba(146,72,122,0.15) 0%, transparent 40%),
-                    radial-gradient(circle at 50% 80%, rgba(84,8,99,0.12) 0%, transparent 40%);
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(228,155,166,0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 60%, rgba(146,72,122,0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(84,8,99,0.12) 0%, transparent 40%);
     z-index: -1;
 }
 
@@ -52,27 +53,27 @@ body::before {
    HERO
    ========================= */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
 }
 
 .hero h1 {
-  font-size: 3.4rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
+    font-size: 3.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  color: var(--color-secondary);
-  margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 2rem;
 }
 
 /* =========================
@@ -84,661 +85,706 @@ body::before {
     font-family: 'MiTipografia', sans-serif;
     font-weight: 500;
     letter-spacing: 0.4px;
-    cursor: pointer;
     padding: 0.7rem 1.6rem;
     border-radius: 30px;
     border: none;
     cursor: pointer;
     font-size: 0.95rem;
+    color: var(--color-white);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .btn-primary {
-  background: var(--color-primary);
-  color: var(--color-white);
+    background: var(--color-primary);
 }
 
 .btn-secondary {
-  background: var(--color-secondary);
-  color: var(--color-white);
+    background: var(--color-secondary);
 }
 
 .btn-music {
-  background: var(--color-accent);
-  color: var(--color-white);
+    background: var(--color-accent);
 }
 
 .btn-primary:hover,
 .btn-secondary:hover,
 .btn-music:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.btn-ver-video {
+    background-color: #f0abfc;
+    color: #7c3aed;
+    border: 2px solid #d8b4fe;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-ver-video:hover {
+    background-color: #e879f9;
+    color: white;
+    border-color: #e879f9;
+}
+
+.btn-cerrar-video {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    z-index: 1002;
+}
+
+.btn-cerrar-video:hover {
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
 }
 
 /* =========================
    SECCIONES
    ========================= */
 .section {
-  padding: 4rem 1.5rem;
-  max-width: 1100px;
-  margin: auto;
+    padding: 4rem 1.5rem;
+    max-width: 1100px;
+    margin: auto;
 }
 
 .section h2 {
-  text-align: center;
-  font-size: 2.3rem;
-  font-weight: 500;
-  color: var(--color-primary);
-  margin-bottom: 2.5rem;
+    text-align: center;
+    font-size: 2.3rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 2.5rem;
 }
 
 /* =========================
    INTRO
    ========================= */
 .intro p {
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
-  font-size: 1.05rem;
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.05rem;
 }
 
 /* =========================
    CALENDARIO DE POEMAS
    ========================= */
-
 .calendario {
-  text-align: center;
+    text-align: center;
 }
 
 .calendario .descripcion {
-  max-width: 600px;
-  margin: 0 auto 2.5rem;
-  font-size: 1rem;
-  opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-size: 1rem;
+    opacity: 0.85;
 }
 
-/* Grid del calendario */
 .calendario-poemas {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.8rem;
-  max-width: 900px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.8rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 /* =========================
    CONTENEDOR DE CADA DÍA
    ========================= */
-
 .dia.poema {
-  position: relative;
-  height: 240px;
-  cursor: pointer;
-  perspective: 1000px;
+    position: relative;
+    height: 240px;
+    cursor: pointer;
+    perspective: 1000px;
 }
 
 /* =========================
    SOBRE (CARTA CERRADA)
    ========================= */
-
 .sobre {
-  width: 100%;
-  height: 160px;
-  background: linear-gradient(145deg, #ffd3d5, #e49ba6);
-  border-radius: 16px;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(84, 8, 99, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.6s ease;
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(145deg, #ffd3d5, #e49ba6);
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(84, 8, 99, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease;
 }
 
-/* Solapa del sobre */
 .solapa {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(145deg, #e49ba6, #92487a);
-  clip-path: polygon(0 0, 100% 0, 50% 55%);
-  transform-origin: top;
-  transition: transform 0.6s ease;
-  z-index: 3;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #e49ba6, #92487a);
+    clip-path: polygon(0 0, 100% 0, 50% 55%);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 3;
 }
 
 /* =========================
    PAPEL DEL POEMA
    ========================= */
-
 .papel {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) translateY(50px);
-  width: 88%;
-  max-height: 170px;
-  background: #f8f3e8;
-  /*background-image: url(img/hoja.png);*/
-  border-radius: 6px;
-  padding: 1rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: #3a2a3a;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-  opacity: 0;
-  transition: all 0.6s ease;
-  z-index: 1;
-  overflow-y: auto;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(50px);
+    width: 88%;
+    max-height: 170px;
+    background: #f8f3e8;
+    border-radius: 6px;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+    transition: all 0.6s ease;
+    z-index: 1;
+    overflow-y: auto;
 }
 
 /* =========================
    ESTADO ABIERTO
    ========================= */
-
 .dia.abierto .solapa {
-  transform: rotateX(160deg);
+    transform: rotateX(160deg);
 }
 
 .dia.abierto .papel {
-  transform: translateX(-50%) translateY(-45px);
-  opacity: 1;
+    transform: translateX(-50%) translateY(-45px);
+    opacity: 1;
 }
 
 .dia.abierto .sobre {
-  transform: translateY(10px);
+    transform: translateY(10px);
 }
 
 /* =========================
    DÍAS BLOQUEADOS
    ========================= */
-
 .dia.bloqueado {
-  opacity: 0.45;
-  cursor: not-allowed;
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
 .dia.bloqueado::after {
-  content: "🔒";
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  font-size: 1.1rem;
+    content: "🔒";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 1.1rem;
 }
 
 /* =========================
-   RESPONSIVE
-   ========================= */
-
-@media (max-width: 480px) {
-  .dia.poema {
-    height: 260px;
-  }
-
-  .papel {
-    font-size: 0.85rem;
-  }
-}
-
-
-
-/* =========================
-  CUALIDADES
+   CUALIDADES
    ========================= */
 .text-block {
-  background: rgba(255,255,255,0.75);
-  border-radius: 20px;
-  padding: 2rem;
-  margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.75);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .text-block h3 {
-  color: var(--color-secondary);
-  margin-bottom: 0.8rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.8rem;
 }
 
 /* =========================
    DESEOS
    ========================= */
 .wish {
-  background: var(--color-soft);
-  border-radius: 25px;
-  padding: 1.4rem;
-  margin: 1rem auto;
-  max-width: 700px;
-  text-align: center;
+    background: var(--color-soft);
+    border-radius: 25px;
+    padding: 1.4rem;
+    margin: 1rem auto;
+    max-width: 700px;
+    text-align: center;
 }
 
 /* =========================
-   SORPRESA – CONTENEDOR
+   SORPRESA
    ========================= */
 .sorpresa {
-  text-align: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: #f9f0ff;
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* El contenido de la sorpresa debe estar OCULTO inicialmente */
+.sorpresa h2 {
+    color: #7c3aed;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+}
+
 .sorpresa-contenido {
-  margin-top: 2rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-  display: none; /* ← ESTO ES IMPORTANTE: oculto inicialmente */
-  flex-direction: column;
-  align-items: center;
-  gap: 1.8rem;
-  max-width: 550px; /* ← Añadir un ancho máximo */
-  margin-left: auto;
-  margin-right: auto; /* ← Centra horizontalmente */
+    margin-top: 2rem;
+    display: none;
+}
+
+.sorpresa-contenido.mostrado {
+    display: block;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.corazon-container {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.frase {
+    font-style: italic;
+    color: #7c3aed;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-top: 1px solid #e9d5ff;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* =========================
-   CARRUSEL – CONTENEDOR
+   CARRUSEL
    ========================= */
-
 .carrusel-contenedor {
-  width: 100%;
-  max-width: 500px;
-  height: 350px;
-  position: relative;
-  margin: 0 auto; /* ← Centra el carrusel */
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(84, 8, 99, 0.25);
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    height: 550px;
 }
 
-/* El carrusel en sí */
 .carrusel {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  display: flex;
-  overflow: visible;
-  opacity: 0;
-  transform: scale(0.9);
-  animation: aparecer 0.8s ease forwards;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
 }
 
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.carrusel img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 10px;
 }
-
-/* Cada imagen del carrusel */
-.carrusel-imagen {
-  min-width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: transform 0.5s ease;
-}
-
-/* =========================
-   VIDEO EN FORMA DE CORAZÓN (NUEVO)
-   ========================= */
-
-/* Contenedor del video con forma de corazón */
-.corazon-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 10;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 20px;
-}
-
-/* El corazón que contiene el video */
-.corazon-video-contenido {
-  width: 320px;
-  height: 300px;
-  position: relative;
-  clip-path: path('M160 40 C240 0 320 40 320 120 C320 200 240 280 160 320 C80 280 0 200 0 120 C0 40 80 0 160 40Z');
-  animation: latido-corazon 1.5s ease infinite alternate;
-  box-shadow: 0 0 50px rgba(255, 107, 139, 0.7);
-}
-
-/* Animación de latido para el corazón */
-@keyframes latido-corazon {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 30px rgba(255, 107, 139, 0.5);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 70px rgba(255, 107, 139, 0.9);
-  }
-}
-
-/* El video dentro del corazón */
-.corazon-video-contenido video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-}
-
-/* Botón para cerrar video (en el corazón) */
-.corazon-video .btn-cerrar-video {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  border-radius: 50%;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 11;
-  transition: all 0.3s ease;
-  color: #540863;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.corazon-video .btn-cerrar-video:hover {
-  background: white;
-  transform: scale(1.1);
-  color: #FF6B8B;
-}
-
-/* Efecto de brillo alrededor del corazón */
-.corazon-video-contenido::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  background: linear-gradient(45deg, 
-    #FF6B8B, #FF8E53, #FFD166, #06D6A0, 
-    #118AB2, #073B4C, #EF476F);
-  z-index: -1;
-  border-radius: 50%;
-  filter: blur(20px);
-  opacity: 0.7;
-  animation: arcoiris 4s linear infinite;
-}
-
-@keyframes arcoiris {
-  0% {
-    filter: hue-rotate(0deg) blur(20px);
-  }
-  100% {
-    filter: hue-rotate(360deg) blur(20px);
-  }
-}
-
-/* =========================
-   CONTROLES DEL CARRUSEL
-   ========================= */
 
 .carrusel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  border-radius: 50%;
-  font-size: 30px;
-  color: #540863;
-  cursor: pointer;
-  z-index: 5;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(124, 58, 237, 0.9);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+    transition: all 0.3s ease;
 }
 
 .carrusel-btn:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
+    background-color: rgba(109, 40, 217, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
 }
 
 .carrusel-prev {
-  left: 15px;
+    left: 25px;
 }
 
 .carrusel-next {
-  right: 15px;
+    right: 25px;
 }
-
-/* =========================
-   INDICADORES
-   ========================= */
 
 .carrusel-indicadores {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-  transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    position: absolute;
+    bottom: 25px; /* Posicionar en la parte inferior */
+    left: 0;
+    right: 0;
+    z-index: 5; /* Mayor z-index para estar sobre la imagen */
+    padding: 0.03px 0;
 }
 
-.indicador {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(84, 8, 99, 0.3);
-  border: 2px solid rgba(84, 8, 99, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
+
+.carrusel-indicador {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(124, 58, 237, 0.3);
+    border: 2px solid rgba(124, 58, 237, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.indicador.activo {
-  background: #FF6B8B;
-  transform: scale(1.2);
-  border-color: #FF6B8B;
+.carrusel-indicador.activo {
+    background-color: #7c3aed;
+    transform: scale(1.3);
+    border-color: #7c3aed;
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.8);
 }
 
-/* =========================
-   INFORMACIÓN DEL CARRUSEL
-   ========================= */
+.carrusel-indicador:hover {
+    background-color: #a855f7;
+    transform: scale(1.2);
+}
 
 .carrusel-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    margin-top: 1rem;
 }
 
 .imagen-contador {
-  font-size: 1.1rem;
-  color: #540863;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0.6rem 1.8rem;
-  border-radius: 25px;
-  box-shadow: 0 5px 15px rgba(84, 8, 99, 0.1);
-  border: 2px solid rgba(255, 107, 139, 0.3);
+    font-size: 1.2rem;
+    color: #374151;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#imagen-actual {
+    color: #7c3aed;
+    font-weight: bold;
+    font-size: 1.3rem;
 }
 
 /* =========================
-   BOTÓN VER VIDEO (MEJORADO)
+   VÍDEO CON FORMA DE CORAZÓN
    ========================= */
-
-.btn-ver-video {
-  background: linear-gradient(135deg, #FF6B8B, #FF8E53);
-  color: white;
-  border: none;
-  padding: 0.9rem 2rem;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(255, 107, 139, 0.4);
+.corazon-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.btn-ver-video:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 25px rgba(255, 107, 139, 0.5);
-  background: linear-gradient(135deg, #FF8E53, #FF6B8B);
+.corazon-video.mostrar {
+    display: flex;
+    animation: fadeIn 0.5s ease;
 }
 
-.btn-ver-video span {
-  font-size: 1.5rem;
-  animation: latido-btn 1s infinite alternate;
+.corazon-video-contenido {
+    position: relative;
+    width: 70%;
+    max-width: 800px;
+    max-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@keyframes latido-btn {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.2); }
+.corazon-video-contenido video {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(219, 39, 119, 0.4);
+    clip-path: polygon(
+        50% 15%, 61% 7%, 74% 4%, 85% 6%, 93% 12%, 98% 20%,
+        100% 30%, 99% 42%, 95% 53%, 88% 63%, 78% 72%, 67% 78%,
+        56% 82%, 50% 84%, 44% 82%, 33% 78%, 22% 72%, 12% 63%,
+        5% 53%, 1% 42%, 0% 30%, 2% 20%, 7% 12%, 15% 6%, 26% 4%, 39% 7%
+    );
+    transform: scale(1);
+    transition: all 0.5s ease;
+    background-color: #000;
+}
+
+.corazon-video.mostrar .corazon-video-contenido video {
+    animation: latidoVideo 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes latidoVideo {
+    0% {
+        transform: scale(0.98);
+        box-shadow: 0 10px 30px rgba(219, 39, 119, 0.4);
+    }
+    100% {
+        transform: scale(1.02);
+        box-shadow: 0 20px 50px rgba(219, 39, 119, 0.7);
+    }
+}
+
+.corazon-video-contenido::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 70%);
+    z-index: -1;
+    border-radius: 50%;
+    animation: brilloCorazon 3s infinite alternate;
+}
+
+@keyframes brilloCorazon {
+    0% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
 }
 
 /* =========================
-   FRASE
-   ========================= */
-
-.frase {
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #540863;
-  max-width: 400px;
-  margin-top: 1rem;
-  font-style: italic;
-}
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-@media (max-width: 600px) {
-  .sorpresa-contenido {
-    padding: 1.5rem;
-    margin: 1rem;
-  }
-  
-  .carrusel-contenedor {
-    height: 300px;
-  }
-  
-  .carrusel-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-  }
-  
-  /* Video en forma de corazón para móviles */
-  .corazon-video-contenido {
-    width: 280px;
-    height: 260px;
-  }
-  
-  .btn-cerrar-video {
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    top: -10px;
-    right: -10px;
-  }
-}
-/* =========================
-  EFECTO CLICK - MARGARITAS
+   EFECTO CLICK - MARGARITAS
    ========================= */
 .click-effect {
-  position: fixed;
-  background-image: url('img/Margarita.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: margarita-particle 0.9s ease-out forwards;
-  z-index: 9999;
+    position: fixed;
+    background-image: url('img/Margarita.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: margarita-particle 0.9s ease-out forwards;
+    z-index: 9999;
 }
 
 @keyframes margarita-particle {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform:
-      translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
-      scale(1)
-      rotate(var(--r));
-  }
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r));
+    }
 }
 
 /* =========================
    FONDO FLORES FLOTANTES
    ========================= */
 .background-flowers {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-  pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .flower {
-  position: absolute;
-  background-image: url('img/Margarita.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.18; /* muy sutil */
-  animation: floatFlower linear infinite;
+    position: absolute;
+    background-image: url('img/Margarita.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    animation: floatFlower linear infinite;
 }
 
 @keyframes floatFlower {
-  from {
-    transform: translateY(100vh) rotate(0deg);
-  }
-  to {
-    transform: translateY(-120px) rotate(360deg);
-  }
+    from {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    to {
+        transform: translateY(-120px) rotate(360deg);
+    }
 }
 
+.corazon-particula {
+    position: absolute;
+    font-size: 24px;
+    color: #f472b6;
+    opacity: 0;
+    animation: flotar 4s infinite linear;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(0deg) scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-150px) rotate(360deg) scale(0);
+        opacity: 0;
+    }
+}
 
 /* =========================
    FOOTER
    ========================= */
 .footer {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  font-size: 0.9rem;
-  color: var(--color-secondary);
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
 }
 
 /* =========================
    RESPONSIVE
    ========================= */
-  @media (max-width: 600px) {
-  body {
-    font-size: 16px;
-  }
+@media (max-width: 1024px) {
+    .carrusel-contenedor {
+        height: 500px;
+    }
+    
+    .corazon-video-contenido {
+        width: 80%;
+    }
+}
 
-  .hero h1 {
-    font-size: 2.4rem;
-  }
+@media (max-width: 768px) {
+    .carrusel-contenedor {
+        height: 400px;
+        padding: 0.5rem;
+    }
+    
+    .carrusel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.8rem;
+    }
+    
+    .carrusel-prev {
+        left: 15px;
+    }
+    
+    .carrusel-next {
+        right: 15px;
+    }
+    
+    .carrusel-info {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .corazon-video-contenido {
+        width: 90%;
+    }
+    
+    .corazon-video-contenido video {
+        max-height: 60vh;
+    }
+    
+    .btn-cerrar-video {
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+        top: -15px;
+        right: -15px;
+    }
+}
 
-  .section {
-    padding: 3rem 1rem;
-  }
+@media (max-width: 600px) {
+    body {
+        font-size: 16px;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dia.poema {
+        height: 260px;
+    }
+
+    .papel {
+        font-size: 0.85rem;
+    }
+    
+    .carrusel-contenedor {
+        height: 350px;
+    }
+    
+    .carrusel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+    
+    .corazon-video-contenido {
+        width: 95%;
+    }
+    
+    .corazon-video-contenido video {
+        max-height: 50vh;
+        transform: scale(0.9);
+    }
+    
+    .sorpresa h2 {
+        font-size: 1.8rem;
+    }
+    
+    .frase {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
 }
