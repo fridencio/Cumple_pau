@@ -270,11 +270,9 @@ function inicializarCalendarioPoemas() {
   console.log('📅 Inicializando calendario de poemas...');
   
   const hoy = new Date();
-  const mesActual = hoy.getMonth(); // Diciembre = 11
-  
-  // Para pruebas: cambiar a día actual real si quieres
-  // const diaActual = hoy.getDate();
-  const diaActual = 22; // Para pruebas
+  const mesActual = hoy.getMonth(); 
+  const diaActual = hoy.getDate();
+  //const diaActual = 22; // Para pruebas
   
   const diasPoemas = document.querySelectorAll(".dia.poema");
   
@@ -410,7 +408,7 @@ function inicializarMusicaFondo() {
   }
   
   // Configurar volumen bajo (30%)
-  audio.volume = 0.3;
+  audio.volume = 0.1;
   
   // Función para intentar reproducir
   function intentarReproducir() {
