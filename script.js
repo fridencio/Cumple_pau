@@ -1,15 +1,14 @@
-// ===============================
-// SCRIPT PRINCIPAL - PÁGINA CUMPLEAÑOS
-// ===============================
-
-// Esperar a que cargue el DOM
-window.addEventListener("DOMContentLoaded", () => {
-  inicializarApp();
-});
+// Variable global para el intervalo del autoplay
+let autoPlayInterval = null;
 
 // ===============================
 // INICIALIZACIÓN PRINCIPAL
 // ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  console.log('🎉 Iniciando aplicación...');
+  inicializarApp();
+});
+
 function inicializarApp() {
   // 1. Botón Descubrir (Hero)
   inicializarBotonDescubrir();
@@ -22,6 +21,9 @@ function inicializarApp() {
   
   // 4. Efectos visuales globales
   inicializarEfectosVisuales();
+  
+  // 5. Música de fondo
+  inicializarMusicaFondo();
 }
 
 // ===============================
@@ -39,14 +41,16 @@ function inicializarBotonDescubrir() {
         });
       }
     });
+    console.log('✅ Botón descubrir inicializado');
+  } else {
+    console.warn('⚠️ No se encontró el botón descubrir');
   }
 }
 
 // ===============================
-// 2.CARRUSEL
+// 2. SORPRESA Y CARRUSEL
 // ===============================
-// Esperar a que el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', function() {
+function inicializarSorpresaCorazon() {
   // Elementos principales
   const btnSorpresa = document.getElementById('btn-sorpresa');
   const sorpresaContenido = document.getElementById('sorpresa');
@@ -59,11 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const videoContainer = document.getElementById('corazon-video');
   const btnCerrarVideo = document.getElementById('cerrar-video');
   
+  // Verificar que existan los elementos
+  if (!btnSorpresa || !sorpresaContenido || !carrusel) {
+    console.warn('⚠️ Elementos de sorpresa no encontrados');
+    return;
+  }
+  
   // Variables del carrusel
   let indiceActual = 0;
-  const totalImagenes = 7; 
+  const totalImagenes = 7;
   
-  // URLs de ejemplo para las imágenes (reemplázalas con tus propias imágenes)
+  // URLs de las imágenes
   const imagenes = [
     'img/1.1.jpeg',
     'img/1.3.jpeg',
@@ -75,60 +85,45 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
   
   // Función para inicializar el carrusel
-  // Modifica la función inicializarCarrusel para asignar clases según dimensiones
-function inicializarCarrusel() {
-  // Limpiar contenido existente
-  carrusel.innerHTML = '';
-  indicadoresContainer.innerHTML = '';
-  
-  // Dimensiones de las imágenes
-  const dimensiones = [
-    {width: 1600, height: 1200, clase: 'imagen-4-3'},    // 1.1
-    {width: 1200, height: 1600, clase: 'imagen-3-4'},    // 1.3
-    {width: 960, height: 1280, clase: 'imagen-3-4'},     // 1.4
-    {width: 960, height: 1280, clase: 'imagen-3-4'},     // 1.5
-    {width: 1600, height: 900, clase: 'imagen-16-9'},    // 1.6
-    {width: 1600, height: 900, clase: 'imagen-16-9'},    // 1.7
-    {width: 1200, height: 1600, clase: 'imagen-3-4'}     // 1.8
-  ];
-  
-  // Crear imágenes del carrusel
-  imagenes.forEach((imagen, index) => {
-    const imgElement = document.createElement('img');
-    imgElement.src = imagen;
-    imgElement.alt = `Imagen ${index + 1}`;
-    imgElement.classList.add('imagen-carrusel');
+  function inicializarCarrusel() {
+    console.log('🎠 Inicializando carrusel...');
     
-    // Asignar clase según dimensiones
-    if (dimensiones[index]) {
-      imgElement.classList.add(dimensiones[index].clase);
-    }
+    // Limpiar contenido existente
+    carrusel.innerHTML = '';
+    indicadoresContainer.innerHTML = '';
     
-    // Manejar error si la imagen no se carga
-    imgElement.onerror = function() {
-      console.error(`No se pudo cargar la imagen: ${imagen}`);
-      // Crear una imagen de reemplazo si falla
-      this.src = `https://via.placeholder.com/${dimensiones[index]?.width || 800}x${dimensiones[index]?.height || 600}/f0f8ff/c3d3f2?text=Imagen+${index+1}`;
-      this.alt = `Imagen ${index + 1} no disponible`;
-    };
-    
-    carrusel.appendChild(imgElement);
-    
-    // Crear indicadores
-    const indicador = document.createElement('div');
-    indicador.classList.add('carrusel-indicador');
-    if (index === 0) indicador.classList.add('activo');
-    
-    indicador.addEventListener('click', () => {
-      cambiarImagen(index);
+    // Crear imágenes del carrusel
+    imagenes.forEach((imagen, index) => {
+      const imgElement = document.createElement('img');
+      imgElement.src = imagen;
+      imgElement.alt = `Imagen ${index + 1}`;
+      imgElement.classList.add('imagen-carrusel');
+      
+      // Manejar error si la imagen no se carga
+      imgElement.onerror = function() {
+        console.error(`❌ No se pudo cargar: ${imagen}`);
+        this.src = `https://via.placeholder.com/800x600/f0f8ff/c3d3f2?text=Imagen+${index+1}`;
+        this.alt = `Imagen ${index + 1} no disponible`;
+      };
+      
+      carrusel.appendChild(imgElement);
+      
+      // Crear indicadores
+      const indicador = document.createElement('div');
+      indicador.classList.add('carrusel-indicador');
+      if (index === 0) indicador.classList.add('activo');
+      
+      indicador.addEventListener('click', () => {
+        cambiarImagen(index);
+        reiniciarAutoPlay();
+      });
+      
+      indicadoresContainer.appendChild(indicador);
     });
     
-    indicadoresContainer.appendChild(indicador);
-  });
-  
-  // Actualizar contador
-  actualizarContador();
-}
+    actualizarContador();
+    console.log('✅ Carrusel inicializado');
+  }
   
   // Función para cambiar de imagen
   function cambiarImagen(nuevoIndice) {
@@ -142,181 +137,218 @@ function inicializarCarrusel() {
     // Actualizar indicadores activos
     const indicadores = document.querySelectorAll('.carrusel-indicador');
     indicadores.forEach((indicador, index) => {
-      if (index === indiceActual) {
-        indicador.classList.add('activo');
-      } else {
-        indicador.classList.remove('activo');
-      }
+      indicador.classList.toggle('activo', index === indiceActual);
     });
     
-    // Actualizar contador
     actualizarContador();
   }
   
   // Función para actualizar el contador de imágenes
   function actualizarContador() {
-    imagenActualSpan.textContent = indiceActual + 1;
-  }
-  
-  // Función para mostrar la sorpresa
-  function mostrarSorpresa() {
-    sorpresaContenido.classList.add('mostrado');
-    // Inicializar el carrusel solo cuando se muestra
-    inicializarCarrusel();
-    
-    // Ocultar el botón de sorpresa después de hacer clic
-    btnSorpresa.style.display = 'none';
-  }
-  
-  // Función para mostrar el video
-  function mostrarVideo() {
-    videoContainer.classList.add('mostrar');
-    // Pausar el carrusel automático si existe
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
+    if (imagenActualSpan) {
+      imagenActualSpan.textContent = indiceActual + 1;
     }
   }
   
-  // Función para cerrar el video
-  function cerrarVideo() {
-    videoContainer.classList.remove('mostrar');
-    // Reanudar el carrusel automático si existe
-    if (autoPlayInterval) {
-      iniciarAutoPlay();
-    }
-  }
-  
-  // Auto-play del carrusel (cambia cada 5 segundos)
-  let autoPlayInterval;
-  
+  // Auto-play del carrusel
   function iniciarAutoPlay() {
+    detenerAutoPlay();
     autoPlayInterval = setInterval(() => {
       cambiarImagen(indiceActual + 1);
     }, 5000);
   }
   
-  // Event Listeners
-  btnSorpresa.addEventListener('click', mostrarSorpresa);
-  
-  btnPrev.addEventListener('click', () => {
-    cambiarImagen(indiceActual - 1);
-    // Reiniciar auto-play
+  function detenerAutoPlay() {
     if (autoPlayInterval) {
       clearInterval(autoPlayInterval);
-      iniciarAutoPlay();
+      autoPlayInterval = null;
     }
-  });
+  }
   
-  btnNext.addEventListener('click', () => {
-    cambiarImagen(indiceActual + 1);
-    // Reiniciar auto-play
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
-      iniciarAutoPlay();
-    }
-  });
+  function reiniciarAutoPlay() {
+    detenerAutoPlay();
+    iniciarAutoPlay();
+  }
   
-  btnVerVideo.addEventListener('click', mostrarVideo);
-  btnCerrarVideo.addEventListener('click', cerrarVideo);
-  
-  // Cerrar el video al hacer clic fuera de él
-  videoContainer.addEventListener('click', function(e) {
-    if (e.target === videoContainer) {
-      cerrarVideo();
-    }
-  });
-  
-  // Cerrar el video con la tecla Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && videoContainer.classList.contains('mostrar')) {
-      cerrarVideo();
-    }
-  });
-  
-  // Iniciar auto-play cuando se muestra la sorpresa
-  btnSorpresa.addEventListener('click', function() {
-    // Pequeño retraso para asegurar que el carrusel se haya inicializado
+  // Función para mostrar la sorpresa
+  function mostrarSorpresa() {
+    sorpresaContenido.classList.add('mostrado');
+    inicializarCarrusel();
+    btnSorpresa.style.display = 'none';
+    
+    // Iniciar autoplay después de un breve retraso
     setTimeout(() => {
       iniciarAutoPlay();
     }, 500);
-  });
+    
+    console.log('🎁 Sorpresa mostrada');
+  }
   
-  // Pausar auto-play al pasar el mouse sobre el carrusel
-  carrusel.addEventListener('mouseenter', function() {
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
+  // Función para mostrar el video
+  function mostrarVideo() {
+    if (videoContainer) {
+      videoContainer.classList.add('mostrar');
+      detenerAutoPlay();
+      console.log('📹 Video mostrado');
+    }
+  }
+  
+  // Función para cerrar el video
+  function cerrarVideo() {
+    if (videoContainer) {
+      videoContainer.classList.remove('mostrar');
+      const video = videoContainer.querySelector('video');
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      if (sorpresaContenido.classList.contains('mostrado')) {
+        iniciarAutoPlay();
+      }
+      console.log('📹 Video cerrado');
+    }
+  }
+  
+  // Event Listeners
+  btnSorpresa.addEventListener('click', mostrarSorpresa);
+  
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => {
+      cambiarImagen(indiceActual - 1);
+      reiniciarAutoPlay();
+    });
+  }
+  
+  if (btnNext) {
+    btnNext.addEventListener('click', () => {
+      cambiarImagen(indiceActual + 1);
+      reiniciarAutoPlay();
+    });
+  }
+  
+  if (btnVerVideo) {
+    btnVerVideo.addEventListener('click', mostrarVideo);
+  }
+  
+  if (btnCerrarVideo) {
+    btnCerrarVideo.addEventListener('click', cerrarVideo);
+  }
+  
+  // Cerrar el video al hacer clic fuera de él
+  if (videoContainer) {
+    videoContainer.addEventListener('click', function(e) {
+      if (e.target === videoContainer) {
+        cerrarVideo();
+      }
+    });
+  }
+  
+  // Cerrar el video con la tecla Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && videoContainer && videoContainer.classList.contains('mostrar')) {
+      cerrarVideo();
     }
   });
   
+  // Pausar auto-play al pasar el mouse sobre el carrusel
+  carrusel.addEventListener('mouseenter', detenerAutoPlay);
+  
   // Reanudar auto-play al quitar el mouse del carrusel
-  carrusel.addEventListener('mouseleave', function() {
+  carrusel.addEventListener('mouseleave', () => {
     if (sorpresaContenido.classList.contains('mostrado')) {
       iniciarAutoPlay();
     }
   });
-});
+  
+  console.log('✅ Sorpresa y carrusel inicializados');
+}
 
 // ===============================
 // 3. CALENDARIO DE POEMAS
 // ===============================
 function inicializarCalendarioPoemas() {
+  console.log('📅 Inicializando calendario de poemas...');
+  
   const hoy = new Date();
-  const diaActual = hoy.getDate();
   const mesActual = hoy.getMonth(); // Diciembre = 11
   
-  // Para pruebas: descomenta la siguiente línea
-  //const diaActual = 22;
+  // Para pruebas: cambiar a día actual real si quieres
+  // const diaActual = hoy.getDate();
+  const diaActual = 22; // Para pruebas
   
   const diasPoemas = document.querySelectorAll(".dia.poema");
+  
+  if (diasPoemas.length === 0) {
+    console.warn('⚠️ No se encontraron días de poemas');
+    return;
+  }
+  
+  console.log(`📆 Fecha actual: ${diaActual} de ${mesActual === 11 ? 'diciembre' : 'mes ' + (mesActual + 1)}`);
+  console.log(`📝 Total de días encontrados: ${diasPoemas.length}`);
   
   diasPoemas.forEach(dia => {
     const diaNumero = parseInt(dia.dataset.dia);
     
-    // Solo funciona en diciembre
+    console.log(`🔍 Procesando día ${diaNumero}`);
+    
+    // Solo funciona en diciembre Y si el día ya pasó o es hoy
     if (mesActual === 11 && diaNumero <= diaActual) {
+      dia.classList.remove("bloqueado");
       dia.classList.add("activo");
+      console.log(`✅ Día ${diaNumero} desbloqueado`);
     } else {
+      dia.classList.remove("activo");
       dia.classList.add("bloqueado");
+      console.log(`🔒 Día ${diaNumero} bloqueado`);
     }
     
     // Click para abrir / cerrar
-    dia.addEventListener("click", () => {
+    dia.addEventListener("click", function() {
       // Si está bloqueado, no hace nada
-      if (dia.classList.contains("bloqueado")) return;
+      if (this.classList.contains("bloqueado")) {
+        console.log(`🚫 Día ${diaNumero} está bloqueado`);
+        return;
+      }
       
       // Cerrar otras cartas abiertas
       diasPoemas.forEach(d => {
-        if (d !== dia) {
+        if (d !== this) {
           d.classList.remove("abierto");
         }
       });
       
       // Abrir / cerrar la actual
-      dia.classList.toggle("abierto");
+      this.classList.toggle("abierto");
+      
+      if (this.classList.contains("abierto")) {
+        console.log(`📖 Día ${diaNumero} abierto`);
+      } else {
+        console.log(`📕 Día ${diaNumero} cerrado`);
+      }
     });
   });
+  
+  console.log('✅ Calendario de poemas inicializado');
 }
 
 // ===============================
 // 4. EFECTOS VISUALES GLOBALES
 // ===============================
 function inicializarEfectosVisuales() {
-  // Efecto de click suave (margaritas)
   inicializarEfectoClick();
-  
-  // Flores de fondo animadas
   inicializarFloresFondo();
+  console.log('✅ Efectos visuales inicializados');
 }
 
 function inicializarEfectoClick() {
   document.addEventListener('click', (e) => {
-    const cantidad = 8; // número de margaritas por click
+    const cantidad = 8;
     
     for (let i = 0; i < cantidad; i++) {
       const margarita = document.createElement('span');
       margarita.classList.add('click-effect');
       
-      const size = Math.random() * 20 + 20; // tamaño variable
+      const size = Math.random() * 20 + 20;
       const x = e.clientX;
       const y = e.clientY;
       
@@ -365,16 +397,15 @@ function inicializarFloresFondo() {
 }
 
 // ===============================
-// MÚSICA DE FONDO AUTOMÁTICA
+// 5. MÚSICA DE FONDO AUTOMÁTICA
 // ===============================
-
 function inicializarMusicaFondo() {
   console.log('🎵 Configurando música de fondo...');
   
   const audio = document.getElementById('musica-fondo');
   
   if (!audio) {
-    console.error('❌ No se encontró el elemento de audio');
+    console.warn('⚠️ No se encontró el elemento de audio');
     return;
   }
   
@@ -392,7 +423,6 @@ function inicializarMusicaFondo() {
         })
         .catch(error => {
           console.log('🔇 Esperando interacción del usuario para reproducir música...');
-          // Esperar a que el usuario interactúe
           configurarEsperaInteraccion();
         });
     }
@@ -406,15 +436,13 @@ function inicializarMusicaFondo() {
       audio.play()
         .then(() => {
           console.log('✅ Música iniciada después de interacción');
-          // Remover los event listeners una vez que se reproduce
           eventos.forEach(evento => {
             document.removeEventListener(evento, iniciarDespuesDeInteraccion);
           });
         })
-        .catch(e => console.log('Error al reproducir:', e));
+        .catch(e => console.warn('⚠️ Error al reproducir:', e));
     }
     
-    // Agregar listeners para eventos de interacción
     eventos.forEach(evento => {
       document.addEventListener(evento, iniciarDespuesDeInteraccion, { once: true });
     });
@@ -423,6 +451,3 @@ function inicializarMusicaFondo() {
   // Intentar reproducir después de un breve retraso
   setTimeout(intentarReproducir, 1000);
 }
-
-// Llamar a la función cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', inicializarMusicaFondo);

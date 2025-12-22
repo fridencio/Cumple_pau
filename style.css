@@ -445,10 +445,10 @@ body::before {
     justify-content: center;
     gap: 12px;
     position: absolute;
-    bottom: 25px; /* Posicionar en la parte inferior */
+    bottom: 25px; 
     left: 0;
     right: 0;
-    z-index: 5; /* Mayor z-index para estar sobre la imagen */
+    z-index: 5; 
     padding: 0.03px 0;
 }
 
