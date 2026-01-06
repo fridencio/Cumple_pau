@@ -269,10 +269,11 @@ function inicializarSorpresaCorazon() {
 function inicializarCalendarioPoemas() {
   console.log('📅 Inicializando calendario de poemas...');
   
-  const hoy = new Date();
-  const mesActual = hoy.getMonth(); 
-  const diaActual = hoy.getDate();
-  //const diaActual = 22; // Para pruebas
+  //const hoy = new Date();
+  //const mesActual = hoy.getMonth(); 
+  //const diaActual = hoy.getDate();
+  const diaActual = 31; // Para pruebas
+  const mesActual = 11;
   
   const diasPoemas = document.querySelectorAll(".dia.poema");
   
